@@ -1,0 +1,11 @@
+XF86Audio{Raise,Lower}Volume
+    volume {+,-}5%
+
+XF86AudioMute
+    volume mute
+
+XF86MonBrightness{Up,Down}
+    light -{A,U} 10
+
+super + shift + e
+    dmenu-emoji
