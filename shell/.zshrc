@@ -1,6 +1,7 @@
 # Created by newuser for 5.8
-
 PATH=$PATH:/home/jeff/.scripts:/home/jeff/.local/bin
+PATH=$PATH:/home/jeff/.scripts:/home/jeff/.local/bin/statusbar
+
 # Git integration
 
 autoload -Uz vcs_info
@@ -19,6 +20,8 @@ PS1="%{$fg[white]%}[%{$fg[white]%}%n%{$fg[green]%}@%{$fg[white]%}%M %{$fg[cyan]%
 export EDITOR=nvim
 export BROWSER=qutebrowser
 export XDG_CONFIG_HOME=~/.config
+export RUSTUP_HOME=~/.local/rustup
+export CARGO_HOME=~/.local/cargo
 
 # History in cache directory:
 setopt HIST_IGNORE_SPACE
@@ -67,27 +70,41 @@ echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
 
-#nnn filemanager config
-export NNN_USE_EDITOR=1
-
-n ()
-{
-    if [ -n $NNNLVL ] && [ "${NNNLVL:-0}" -ge 1 ]; then
-        echo "nnn is already running"
-        return
-    fi
-
-    export NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
-
-    nnn "$@"
-
-    if [ -f "$NNN_TMPFILE" ]; then
-        . "$NNN_TMPFILE"
-        rm -f "$NNN_TMPFILE" > /dev/null
-    fi
+#lf filemanager config
+_zlf() {
+    emulate -L zsh
+    local d=$(mktemp -d) || return 1
+    {
+        mkfifo -m 600 $d/fifo || return 1
+        tmux split -bf zsh -c "exec {ZLE_FIFO}>$d/fifo; export ZLE_FIFO; exec lf" || return 1
+        local fd
+        exec {fd}<$d/fifo
+        zle -Fw $fd _zlf_handler
+    } always {
+        rm -rf $d
+    }
 }
+zle -N _zlf
+bindkey '\ek' _zlf
 
+_zlf_handler() {
+    emulate -L zsh
+    local line
+    if ! read -r line <&$1; then
+        zle -F $1
+        exec {1}<&-
+        return 1
+    fi
+    eval $line
+    zle -R
+}
+zle -N _zlf_handler
 
+source "${XDG_CONFIG_HOME:-$HOME/.config}/lf-shellcd/lf-shellcd"
+
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init --path)"
+eval "$(pyenv virtualenv-init -)"
 
 # Edit line in vim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
@@ -95,3 +112,4 @@ bindkey '^e' edit-command-line
 
 # Load aliases and shortcuts if existent.
 [ -f "$HOME/.bash_aliases" ] && source "$HOME/.bash_aliases"
+

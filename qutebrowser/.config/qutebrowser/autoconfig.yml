@@ -6,7 +6,19 @@
 
 config_version: 2
 settings:
+  backend:
+    global: webengine
+  colors.webpage.darkmode.enabled:
+    global: true
+  colors.webpage.preferred_color_scheme:
+    global: dark
   content.geolocation:
     https://www.canadiantire.ca: false
+  content.pdfjs:
+    global: true
   downloads.location.directory:
     global: ~/downloads
+  fonts.default_family:
+    global: Hurmit NerdFont Mono
+  fonts.default_size:
+    global: 11pt

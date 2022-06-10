@@ -1,0 +1,34 @@
+#! /bin/sh
+
+# Startup programs
+#~/.config/bspwm/startup &
+monitor 
+
+pgrep bspswallow || bspswallow &
+
+bspc monitor eDP-1 -d 1 2 3 4 5
+bspc monitor HDMI-1-0 -d 6 7 8 9 10
+
+~/.config/lemonbar/bar.py &
+
+# General config
+bspc config border_width 2
+bspc config window_gap 10
+bspc config focus_follows_pointer false
+bspc config focused_border_color "#83a598"
+bspc config normal_border_color "#3c3836"
+
+# Layout config
+bspc config split_ratio 0.50
+bspc config borderless_monocle false
+bspc config gapless_monocle true
+bspc config single_monocle true
+
+# Assigning workspaces
+
+# Making windows floating
+bspc rule -a "Preferences" state=floating
+bspc rule -a "Zathura" state=tiled
+
+xsetroot -cursor_name left_ptr &
+

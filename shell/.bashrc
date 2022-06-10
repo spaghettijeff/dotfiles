@@ -4,6 +4,8 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+echo 'find courses for next term'
+
 force_color_prompt=yes
 export PS1="[\u@\h \W]\[$(tput sgr0)\]\[\033[38;5;2m\]\\$\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"
 #PS1='[\u@\h \W]\]$ '
@@ -53,3 +55,4 @@ n ()
 if [[ -f /home/jeff/.bash_aliases ]]; then
 	. /home/jeff/.bash_aliases
 fi
+. "/home/jeff/.local/cargo/env"

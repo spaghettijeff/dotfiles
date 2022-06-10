@@ -1,13 +1,17 @@
-[[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
-
+[[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources 
 xrandr --setprovideroutputsource NVIDIA-G0 modesetting &
 xrandr --auto &
-slstatus &
 sxhkd &
+slstatus &
 xrdb ~/.Xresources &
-picom &
+picom --experimental-backends &
 unclutter &
-feh --no-fehbg --bg-fill '/home/jeff/images/wallpapers/526874.jpg' &
+syncthing > /dev/null 2>&1 &
+mconnect -d &
+mpd &
+mpDris2 &
+nitrogen --restore &
 
-exec dwm > ~/.dwm.log
-#exec xmonad
+export DESKTOP_SESSION="bspwm"
+exec bspwm
+#exec dwm
