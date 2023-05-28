@@ -9,6 +9,5 @@ alias mutt="neomutt"
 
 alias zathura="swallow zathura"
 alias sxiv="swallow sxiv"
-
-alias protonup="sudo -u steam protonup"
+alias e="swallow emacsclient -c"
 alias barrier="barriers -c ~/.config/barrier/barrier.conf --disable-crypto"

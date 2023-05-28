@@ -2,8 +2,9 @@ call plug#begin('~/.config/plugged')
 Plug 'scrooloose/nerdtree'
 Plug 'itchyny/lightline.vim'
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
-Plug 'vlime/vlime', {'rtp': 'vim/'}
 Plug 'lifepillar/vim-mucomplete'
+Plug 'kassio/neoterm'
+Plug 'kovisoft/slimv'
 call plug#end()
 
 
@@ -42,11 +43,13 @@ set shortmess+=c
 let g:mucomplete#enable_auto_at_startup = 1
 
 
-source $HOME/.config/nvim/paredit.vim
-let g:vlime_compiler_policy = {"DEBUG": 3}
-
-
 source $HOME/.config/nvim/key_binds.vim
 map <C-n> :NERDTreeToggle<CR>
 
+source $HOME/.config/nvim/paredit.vim
+let g:slimv_swank_cmd='T sbcl --load ~/.config/plugged/slimv/slime/start-swank.lisp &'
+let g:slimv_impl='sbcl'
+let g:slimv_repl_split=2
+let g:slimv_repl_split_size=18
+let g:slimv_keybindings=2
 

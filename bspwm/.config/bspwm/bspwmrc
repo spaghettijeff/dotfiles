@@ -2,14 +2,14 @@
 
 # Startup programs
 #~/.config/bspwm/startup &
-monitor 
+#monitor 
 
 pgrep bspswallow || bspswallow &
 
 bspc monitor eDP-1 -d 1 2 3 4 5
-bspc monitor HDMI-1-0 -d 6 7 8 9 10
+#bspc monitor HDMI-1-0 -d 6 7 8 9 10
 
-~/.config/lemonbar/bar.py &
+~/.config/polybar/launch.sh &
 
 # General config
 bspc config border_width 2

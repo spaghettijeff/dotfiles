@@ -323,7 +323,7 @@ class Window(Module):
                 self._title = self._regex.findall(out)[0]
             else:
                 self._title = ''
-        return self._title
+        return self._title[0:64]
 
 
 
@@ -380,18 +380,18 @@ modules = (
     Const('  '),
     Clock(),
 
-    Const('%{Sl}%{l}'),
-    BSPWM('HDMI-1-0'),
-    Const('  '),
-    Window('HDMI-1-0'),
-    Const('%{r}'),
-    Volume('@DEFAULT_SINK@'),
-    Const('  '),
-    Memory(),
-    Const('  '),
-    CPU(), 
-    Const('  '),
-    Clock(),
+#   Const('%{Sl}%{l}'),
+#   BSPWM('HDMI-1-0'),
+#   Const('  '),
+#   Window('HDMI-1-0'),
+#   Const('%{r}'),
+#   Volume('@DEFAULT_SINK@'),
+#   Const('  '),
+#   Memory(),
+#   Const('  '),
+#   CPU(), 
+#   Const('  '),
+#   Clock(),
 )
 
 

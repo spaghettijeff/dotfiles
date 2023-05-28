@@ -1,4 +1,3 @@
-
 ##############################
 ### wm independent hotkeys ###
 ##############################
@@ -16,9 +15,12 @@ super + shift + w
 super + a
 	firefox
 
+super + e 
+    emacsclient -c
+
 # program launcher
 super + d
-	rofi -show run
+	rofi -show drun
 
 # ssh launcher
 super + s

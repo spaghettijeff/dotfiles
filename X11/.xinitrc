@@ -1,17 +1,18 @@
 [[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources 
 xrandr --setprovideroutputsource NVIDIA-G0 modesetting &
 xrandr --auto &
-sxhkd &
-slstatus &
-xrdb ~/.Xresources &
-picom --experimental-backends &
-unclutter &
-syncthing > /dev/null 2>&1 &
+
+emacs --daemon &
+./.config/polybar/launch.sh &
 mconnect -d &
+picom &
+syncthing > /dev/null 2>&1 &
 mpd &
+unclutter &
 mpDris2 &
 nitrogen --restore &
+xrdb ~/.Xresources &
 
 export DESKTOP_SESSION="bspwm"
-exec bspwm
-#exec dwm
+sxhkd &
+exec dbus-launch --exit-with-session bspwm

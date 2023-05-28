@@ -14,6 +14,7 @@ settings:
     global: dark
   content.geolocation:
     https://www.canadiantire.ca: false
+    https://www.monster.ca: false
   content.pdfjs:
     global: true
   downloads.location.directory:
